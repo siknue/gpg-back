@@ -1,0 +1,56 @@
+# 共通設定
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db
+
+# IDE/エディタ関連
+.vscode/
+.idea/
+*.suo
+*.swp
+*.log
+**/__pycache__/**
+
+# 環境変数ファイル
+.env
+.env.local
+.env.*.local
+
+# フロントエンド（React）関連
+/frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.next/
+frontend/.cache/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+frontend/coverage/
+
+# バックエンド（FastAPI）関連
+/backend/__pycache__/
+backend/*.pyc
+backend/*.pyo
+backend/*.pyd
+backend/.venv/
+backend/env/
+backend/venv/
+backend/.mypy_cache/
+backend/.pytest_cache/
+backend/instance/
+backend/coverage/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+
+# Docker関連
+docker-compose.override.yml
+*.pid
+
+# ログファイル
+*.log
+
+# その他キャッシュファイル
+*.bak
+*.tmp
