@@ -54,3 +54,6 @@ docker-compose.override.yml
 # その他キャッシュファイル
 *.bak
 *.tmp
+
+
+buildcommands.md
