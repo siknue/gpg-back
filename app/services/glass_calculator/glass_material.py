@@ -1,4 +1,4 @@
-class Material():
+class GlassMaterial():
     """
     ガラス材料の定数クラス
     """

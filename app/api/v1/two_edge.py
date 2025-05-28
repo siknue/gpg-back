@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.services.glass_calculator.twoside.uniform import TwoSideUniformLoadGlass
-from app.services.glass_calculator.calculator import CalculateStress
+from app.services.glass_calculator.glass_calculator import CalculateStress
 from app.schemas.glass import (
     TwoSideUniformInputScheme,
     CalculationResult,

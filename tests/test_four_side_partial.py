@@ -1,9 +1,9 @@
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import InterlayerMaterialTypeEnum
+from app.services.glass_calculator.contracts.enums import InterlayerMaterialTypeEnum
 from app.services.glass_calculator.fourside.partial import FourSidePartialLoadGlass
 import pytest
 
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.glass_material import GlassMaterial
 
 class TestFourSidePartialLoadGlass:
     """四辺支持部分均等荷重ガラス計算クラスのテスト"""
@@ -16,7 +16,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             test_glass = FourSidePartialLoadGlass(
                 100,
                 200,
@@ -39,7 +39,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             
             with pytest.raises(ValueError, match="b/a is smaller than 1 or greater than 2. use FEM instead"):
                 FourSidePartialLoadGlass(
@@ -57,7 +57,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             with pytest.raises(ValueError, match="b/a is smaller than 1 or greater than 2. use FEM instead"):
                 FourSidePartialLoadGlass(
                     100,
@@ -77,7 +77,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSidePartialLoadGlass(
                 1000,
                 1000,
@@ -99,7 +99,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSidePartialLoadGlass(
                 1000,
                 2000,
@@ -124,7 +124,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSidePartialLoadGlass(
                 1000,
                 1000,
@@ -145,7 +145,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSidePartialLoadGlass(
                 1000,
                 2000,
@@ -169,7 +169,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSidePartialLoadGlass(
                 1000,
                 1000,
@@ -190,7 +190,7 @@ class TestFourSidePartialLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSidePartialLoadGlass(
                 1000,
                 2000,

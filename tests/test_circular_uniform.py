@@ -1,7 +1,7 @@
 import pytest
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.circular.uniform import CircleUniformLoadGlass
-from app.services.glass_calculator.contracts import InterlayerMaterialTypeEnum
+from app.services.glass_calculator.contracts.enums import InterlayerMaterialTypeEnum
 from app.services.glass_calculator.glass_layer import GlassLayer
 
 
@@ -16,7 +16,7 @@ class TestCircleSupportedUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            material = Material()
+            material = GlassMaterial()
             test_glass = CircleUniformLoadGlass(
                 1000,
                 glass_layer,
@@ -34,21 +34,22 @@ class TestCircleSupportedUniformLoadGlass:
         
         def test_stress_calculation(self):
             """応力を計算できること"""
-            layer = [6, 6]
+            layer_thickness = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
-            glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            material = Material()
+            glass_layer = GlassLayer(layer_thickness, inter_layer_material) # type: ignore
+            print(glass_layer.get_equivalent_thickness())
+            glass_material = GlassMaterial()
             plate = CircleUniformLoadGlass(
-                1000,
+                500,
                 glass_layer,
                 1.0,
-                material
+                glass_material
             )
             
             stress = plate.calculate_stress()
             
             # thickness.get_equivalent_thickness() は 12 を返すと仮定
-            expected = 1.212 * (1 * 1000**2) / 12**2
+            expected = 1.212 * (1 * 500**2) / 12**2
             assert pytest.approx(stress, 0.001) == expected
     
     class TestCalculateDisplacement:
@@ -59,17 +60,17 @@ class TestCircleSupportedUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            material = Material()
+            glass_material = GlassMaterial()
             plate = CircleUniformLoadGlass(
-                1000,
+                500,
                 glass_layer,
                 1.0,
-                material
+                glass_material
             )
             
             displacement = plate.calculate_displacement()
             
             E = plate.constants.E
             # thickness**3 は 1728 (12^3)
-            expected = 0.756 * (1 * 1000**4) / (E * 12**3)
+            expected = 0.756 * (1 * 500**4) / (E * 12**3)
             assert pytest.approx(displacement, 0.001) == expected

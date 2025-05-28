@@ -1,8 +1,8 @@
 from typing import Dict, List
 
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import  IPlate
+from app.services.glass_calculator.contracts.interfaces import  IPlate
 from app.services.binary_search import binary_search
 from app.services.binary_search.binary_search import BisectTypeEnum
 
@@ -22,7 +22,7 @@ class FourSidePartialLoadGlass(IPlate):
         w: float,
         a1: float,
         b1: float,
-        material: Material
+        material: GlassMaterial
     ):
         """
         コンストラクタ

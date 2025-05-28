@@ -1,6 +1,6 @@
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import InterlayerMaterialTypeEnum
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.contracts.enums import InterlayerMaterialTypeEnum
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.threeside.uniform import ThreeSideUniformLoadGlass
 import pytest
 
@@ -16,7 +16,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             test_glass = ThreeSideUniformLoadGlass(
                 100,
                 200,
@@ -37,7 +37,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             
             with pytest.raises(ValueError, match="b/a is smaller than 0.1. use FEM instead"):
                 ThreeSideUniformLoadGlass(1001, 100, glass_layer, 1.0, glass_material)
@@ -50,7 +50,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = ThreeSideUniformLoadGlass(
                 1000,
                 100,
@@ -70,7 +70,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = ThreeSideUniformLoadGlass(
                 1000,
                 3000,
@@ -89,7 +89,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = ThreeSideUniformLoadGlass(
                 100,
                 500,
@@ -111,7 +111,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = ThreeSideUniformLoadGlass(
                 1000,
                 100,
@@ -131,7 +131,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [5]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = ThreeSideUniformLoadGlass(
                 100,
                 300,
@@ -154,7 +154,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = ThreeSideUniformLoadGlass(
                 1000,
                 100,
@@ -175,7 +175,7 @@ class TestThreeSideUniformLoadGlass:
             layer = [5]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = ThreeSideUniformLoadGlass(
                 100,
                 300,

@@ -1,5 +1,6 @@
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import AllowableStressTerms, FractureStrength, GlassTypeEnum, IAllowableStress, StressLimits
+from app.services.glass_calculator.contracts.dataclasses import AllowableStressTerms, FractureStrength, IAllowableStress, StressLimits
+from app.services.glass_calculator.contracts.enums import GlassTypeEnum
 
 class GlassAllowableUnitStress:
     def __init__(self, glass_layer: GlassLayer, glass_type: GlassTypeEnum):

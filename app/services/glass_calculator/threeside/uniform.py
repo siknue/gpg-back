@@ -1,8 +1,8 @@
 from typing import Dict
 
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import  IPlate
+from app.services.glass_calculator.contracts.interfaces import  IPlate
 from app.services.binary_search import binary_search
 from app.services.binary_search.binary_search import BisectTypeEnum
 
@@ -14,7 +14,7 @@ class ThreeSideUniformLoadGlass(IPlate):
     範囲外の入力値に対しては、例外をraiseします。
     """
     
-    def __init__(self, free_edge: float, fixed_edge: float, layer: GlassLayer, w: float, material:Material):
+    def __init__(self, free_edge: float, fixed_edge: float, layer: GlassLayer, w: float, material:GlassMaterial):
         """
         コンストラクタ
         

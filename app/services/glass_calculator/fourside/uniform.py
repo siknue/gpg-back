@@ -1,13 +1,13 @@
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import  IPlate
+from app.services.glass_calculator.contracts.interfaces import  IPlate
 from app.services.binary_search import binary_search
 from app.services.binary_search.binary_search import BisectTypeEnum
 
 class FourSideUniformLoadGlass(IPlate):
     """四辺支持ガラスの応力・変位計算クラス"""
     
-    def __init__(self, short_edge: float, long_edge: float, layer: GlassLayer, w: float, material:Material):
+    def __init__(self, short_edge: float, long_edge: float, layer: GlassLayer, w: float, material:GlassMaterial):
         """
         四辺支持された均一荷重下のガラス板の初期化
         
