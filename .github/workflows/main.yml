@@ -15,6 +15,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        
+      - name: Create .env file
+        run: |
+            echo "COGNITO_USERPOOL_ID=${{ secrets.COGNITO_USERPOOL_ID }}" >> .env
+            echo "COGNITO_APP_CLIENT_ID=${{ secrets.COGNITO_APP_CLIENT_ID }}" >> .env
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
