@@ -1,4 +1,4 @@
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.glass_layer import GlassLayer
 
 
@@ -8,7 +8,7 @@ class CircleUniformLoadGlass:
     Calculates stress and displacement for a circular glass plate under uniform load.
     """
     
-    def __init__(self, radius: float, layer: GlassLayer, w: float, material:Material):
+    def __init__(self, radius: float, layer: GlassLayer, w: float, material:GlassMaterial):
         """
         Constructor
         
@@ -32,6 +32,7 @@ class CircleUniformLoadGlass:
         """
         thickness = self.layer.get_equivalent_thickness()
         sigma = 1.212 * (self.w * self.radius**2) / thickness**2
+        print(f"1.212 * ({self.w} * {self.radius}**2) / {thickness}**2")
         return sigma
     
     def calculate_displacement(self) -> float:

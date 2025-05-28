@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from app.schemas.glass import CalculationResult, CircularUniformInputScheme
-from app.services.glass_calculator.calculator import CalculateStress
+from app.services.glass_calculator.glass_calculator import CalculateStress
 
 router = APIRouter()
 

@@ -1,8 +1,8 @@
 import pytest
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import InterlayerMaterialTypeEnum
+from app.services.glass_calculator.contracts.enums import InterlayerMaterialTypeEnum
 from app.services.glass_calculator.fourside.uniform import FourSideUniformLoadGlass
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.glass_material import GlassMaterial
 
 
 class TestFourSideUniformLoadGlass:
@@ -16,7 +16,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             test_glass = FourSideUniformLoadGlass(
                 100, 200, glass_layer, 1.0, glass_material
             )
@@ -33,7 +33,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
 
             with pytest.raises(
                 ValueError, match="短辺が長辺より長くなることはできません"
@@ -45,7 +45,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
 
             with pytest.raises(
                 ValueError, match="b/aが5を超えています。代わりにFEMを使用してください"
@@ -62,7 +62,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSideUniformLoadGlass(100, 100, glass_layer, 1.0, glass_material)
 
             # プライベートメソッドにアクセス
@@ -76,7 +76,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSideUniformLoadGlass(100, 200, glass_layer, 1.0, glass_material)
 
             coeff = plate._calculate_coeff()
@@ -89,7 +89,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSideUniformLoadGlass(100, 500, glass_layer, 1.0, glass_material)
 
             coeff = plate._calculate_coeff()
@@ -105,7 +105,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSideUniformLoadGlass(100, 100, glass_layer, 1.0, glass_material)
 
             stress = plate.calculate_stress()
@@ -119,7 +119,7 @@ class TestFourSideUniformLoadGlass:
             layer = [5]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSideUniformLoadGlass(
                 100, 200, glass_layer, 0.5, glass_material  # w を変更
             )
@@ -138,7 +138,7 @@ class TestFourSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSideUniformLoadGlass(100, 100, glass_layer, 1.0, glass_material)
 
             displacement = plate.calculate_displacement()
@@ -153,7 +153,7 @@ class TestFourSideUniformLoadGlass:
             layer = [5]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = FourSideUniformLoadGlass(
                 100, 200, glass_layer, 0.5, glass_material  # w を変更
             )

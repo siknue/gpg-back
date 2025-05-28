@@ -1,11 +1,6 @@
 from enum import Enum
 from typing import Sequence
-
-class InterlayerMaterialTypeEnum(Enum):
-    SG = "sg"
-    PVB = "pvb"
-    EVA = "eva"
-
+from app.services.glass_calculator.contracts.enums import InterlayerMaterialTypeEnum
 class GlassLayer:
     def __init__(self, layers: Sequence[float], interlayer_material: InterlayerMaterialTypeEnum):
         self.layers = layers
@@ -22,8 +17,10 @@ class GlassLayer:
         total_thickness = sum(self.layers)
         
         # Todo: SG以外の実装を行う。
+        print(self.interlayer_material == InterlayerMaterialTypeEnum.SG)
         if self.interlayer_material == InterlayerMaterialTypeEnum.SG:
             return total_thickness
             
-        equivalent_thickness = 0.866 * total_thickness - 0.268
-        return equivalent_thickness
+        else:
+            equivalent_thickness = 0.866 * total_thickness - 0.268
+            return equivalent_thickness

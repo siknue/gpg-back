@@ -1,13 +1,15 @@
 import math
-from app.services.glass_calculator.material import Material
+
+from app.services.glass_calculator.contracts.enums import InterlayerMaterialTypeEnum, GlassTypeEnum
+
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import InterlayerMaterialTypeEnum
 from app.services.glass_calculator.circular.uniform import CircleUniformLoadGlass
 from app.services.glass_calculator.threeside.uniform import ThreeSideUniformLoadGlass
 from app.services.glass_calculator.twoside.uniform import TwoSideUniformLoadGlass
 from app.services.glass_calculator.fourside.partial import FourSidePartialLoadGlass
 from app.services.glass_calculator.fourside.uniform import FourSideUniformLoadGlass
-
+from app.services.glass_calculator.allowable_stress import GlassAllowableUnitStress
 
 class CalculateStress:
 
@@ -20,11 +22,16 @@ class CalculateStress:
         w = data.w  # N/mm2
         nu = data.nu
         E = data.E
-        material = Material(E, nu)
+        material = GlassMaterial(E, nu)
         layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
         calculator = FourSideUniformLoadGlass(a, b, layer, w, material)
         sigma = calculator.calculate_stress()
         delta = calculator.calculate_displacement()
+
+        # 許容応力度の計算
+        glass_type = GlassTypeEnum.FLOAT  # ガラスの種類を指定
+        allowabe_stress_calculator = GlassAllowableUnitStress(t, glass_type)
+
         return {"sigma": sigma, "delta": delta}
 
     @staticmethod
@@ -38,7 +45,7 @@ class CalculateStress:
         w = data.w  # N/mm2
         E = data.E
         nu = data.nu
-        material = Material(E, nu)
+        material = GlassMaterial(E, nu)
         layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
         calculator = FourSidePartialLoadGlass(a, b, layer, w, a1, b1, material)
         sigma = calculator.calculate_stress()
@@ -55,7 +62,7 @@ class CalculateStress:
         w = data.w  # N/mm2
         nu = data.nu
         E = data.E
-        material = Material(E, nu)
+        material = GlassMaterial(E, nu)
         layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
         calculator = ThreeSideUniformLoadGlass(a, b, layer, w, material)
         sigma = calculator.calculate_stress()
@@ -72,7 +79,7 @@ class CalculateStress:
         w = data.w  # N/mm2
         nu = data.nu
         E = data.E
-        material = Material(E, nu)
+        material = GlassMaterial(E, nu)
         layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
         calculator = TwoSideUniformLoadGlass(a, b, layer, w, material)
         sigma = calculator.calculate_stress()
@@ -88,7 +95,7 @@ class CalculateStress:
         w = data.w  # N/mm2
         nu = data.nu
         E = data.E
-        material = Material(E, nu)
+        material = GlassMaterial(E, nu)
         layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
         calculator = CircleUniformLoadGlass(r, layer, w, material)
         sigma = calculator.calculate_stress()

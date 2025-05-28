@@ -1,6 +1,6 @@
 from app.services.glass_calculator.glass_layer import GlassLayer
-from app.services.glass_calculator.contracts import InterlayerMaterialTypeEnum
-from app.services.glass_calculator.material import Material
+from app.services.glass_calculator.contracts.enums import InterlayerMaterialTypeEnum
+from app.services.glass_calculator.glass_material import GlassMaterial
 from app.services.glass_calculator.twoside.uniform import TwoSideUniformLoadGlass
 import pytest
 
@@ -16,7 +16,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             test_glass = TwoSideUniformLoadGlass(
                 100,
                 200,
@@ -37,7 +37,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             
             with pytest.raises(ValueError, match="b/a is smaller than 0.5. use FEM instead"):
                 TwoSideUniformLoadGlass(1000, 499, glass_layer, 1.0, glass_material)
@@ -50,7 +50,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
 
             plate = TwoSideUniformLoadGlass(
                 1000,
@@ -71,7 +71,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = TwoSideUniformLoadGlass(
                 1000,
                 3000,
@@ -93,7 +93,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = TwoSideUniformLoadGlass(
                 1000,
                 500,
@@ -113,7 +113,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [5]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = TwoSideUniformLoadGlass(
                 1000,
                 3000,
@@ -136,7 +136,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [6, 6]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = TwoSideUniformLoadGlass(
                 1000,
                 500,
@@ -157,7 +157,7 @@ class TestTwoSideUniformLoadGlass:
             layer = [5]
             inter_layer_material = InterlayerMaterialTypeEnum.SG
             glass_layer = GlassLayer(layer, inter_layer_material) # type: ignore
-            glass_material = Material()
+            glass_material = GlassMaterial()
             plate = TwoSideUniformLoadGlass(
                 1000,
                 3000,

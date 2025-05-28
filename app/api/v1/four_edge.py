@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.services.glass_calculator.calculator import CalculateStress
+from app.services.glass_calculator.glass_calculator import CalculateStress
 from app.schemas.glass import (
     FourSidePartialInputScheme,
     FourSideUniformInputScheme,
