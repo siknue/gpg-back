@@ -9,13 +9,13 @@ from app.api.api import router as glass_calculator_router
 
 app = FastAPI(title="Glass Stress Calculator")
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"]
-)
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["*"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     #allow_headers=["*"]
+# )
 
 app.include_router(glass_calculator_router)
 
