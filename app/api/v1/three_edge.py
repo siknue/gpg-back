@@ -7,7 +7,7 @@ from app.schemas.glass import (
 
 router = APIRouter()
 
-@router.post("/three-partial", response_model=CalculationResult)
+@router.post("/three-uniform", response_model=CalculationResult)
 async def perform_calculation_three_uniform(input_data: ThreeSideUniformInputScheme):
     result = CalculateStress.calculate_threeside_uniform(input_data)
     return result

@@ -10,7 +10,7 @@ from app.services.glass_calculator.twoside.uniform import TwoSideUniformLoadGlas
 from app.services.glass_calculator.fourside.partial import FourSidePartialLoadGlass
 from app.services.glass_calculator.fourside.uniform import FourSideUniformLoadGlass
 from app.services.glass_calculator.allowable_stress import GlassAllowableUnitStress
-
+from typing import Sequence
 class CalculateStress:
 
     @staticmethod
@@ -18,19 +18,20 @@ class CalculateStress:
         # 四辺支持板の計算式
         a = data.a  # mm
         b = data.b  # mm
-        t = data.t  # mm
+        t = data.t  # mm list of thicknesses
         w = data.w  # N/mm2
         nu = data.nu
         E = data.E
-        material = GlassMaterial(E, nu)
-        layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
-        calculator = FourSideUniformLoadGlass(a, b, layer, w, material)
+        glass_material = GlassMaterial(E, nu)
+        glass_layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
+        calculator = FourSideUniformLoadGlass(a, b, glass_layer, w, glass_material)
         sigma = calculator.calculate_stress()
         delta = calculator.calculate_displacement()
 
         # 許容応力度の計算
         glass_type = GlassTypeEnum.FLOAT  # ガラスの種類を指定
-        allowabe_stress_calculator = GlassAllowableUnitStress(t, glass_type)
+        allowabe_stress_calculator = GlassAllowableUnitStress(glass_layer, glass_type)
+        #print(f"allowable_stress: {allowabe_stress_calculator.allowable_stress.allowableStress.shortTerm.edge}")
 
         return {"sigma": sigma, "delta": delta}
 

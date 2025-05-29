@@ -17,7 +17,6 @@ class GlassLayer:
         total_thickness = sum(self.layers)
         
         # Todo: SG以外の実装を行う。
-        print(self.interlayer_material == InterlayerMaterialTypeEnum.SG)
         if self.interlayer_material == InterlayerMaterialTypeEnum.SG:
             return total_thickness
             
