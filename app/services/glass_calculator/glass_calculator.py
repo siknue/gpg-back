@@ -15,91 +15,108 @@ class CalculateStress:
 
     @staticmethod
     def calculate_fourside_uniform(data):
-        # 四辺支持板の計算式
-        a = data.a  # mm
-        b = data.b  # mm
-        t = data.t  # mm list of thicknesses
-        w = data.w  # N/mm2
-        nu = data.nu
-        E = data.E
-        glass_material = GlassMaterial(E, nu)
-        glass_layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
-        calculator = FourSideUniformLoadGlass(a, b, glass_layer, w, glass_material)
-        sigma = calculator.calculate_stress()
-        delta = calculator.calculate_displacement()
+        try:
+            # 四辺支持板の計算式
+            a = data.a  # mm
+            b = data.b  # mm
+            glass_layer_thicknesses = data.t  # mm list of thicknesses
+            w = data.w  # N/mm2
+            nu = data.nu
+            E = data.E
+            #inter_layer_material = data.interlayer_material  # InterlayerMaterialTypeEnum
 
-        # 許容応力度の計算
-        glass_type = GlassTypeEnum.FLOAT  # ガラスの種類を指定
-        allowabe_stress_calculator = GlassAllowableUnitStress(glass_layer, glass_type)
-        #print(f"allowable_stress: {allowabe_stress_calculator.allowable_stress.allowableStress.shortTerm.edge}")
+            glass_material = GlassMaterial(E, nu)
+            glass_layer = GlassLayer(glass_layer_thicknesses, InterlayerMaterialTypeEnum.SG) # type: ignore
+            calculator = FourSideUniformLoadGlass(a, b, glass_layer, w, glass_material)
+            sigma = calculator.calculate_stress()
+            delta = calculator.calculate_displacement()
 
-        return {"sigma": sigma, "delta": delta}
+            # 許容応力度の計算
+            glass_type = GlassTypeEnum.FLOAT  # ガラスの種類を指定
+            allowabe_stress_calculator = GlassAllowableUnitStress(glass_layer, glass_type)
+            #print(f"allowable_stress: {allowabe_stress_calculator.allowable_stress.allowableStress.shortTerm.edge}")
+
+            return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+        except ValueError as e:
+            return {"error": str(e)}
 
     @staticmethod
     def calculate_fourside_partial(data):
-        # 四辺支持部分荷重板の計算式
-        a = data.a  # mm
-        b = data.b  # mm
-        a1 = data.a1  # mm
-        b1 = data.b1  # mm
-        t = data.t  # mm
-        w = data.w  # N/mm2
-        E = data.E
-        nu = data.nu
-        material = GlassMaterial(E, nu)
-        layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
-        calculator = FourSidePartialLoadGlass(a, b, layer, w, a1, b1, material)
-        sigma = calculator.calculate_stress()
-        delta = calculator.calculate_displacement()
+        try:
+            # 四辺支持部分荷重板の計算式
+            a = data.a  # mm
+            b = data.b  # mm
+            a1 = data.a1  # mm
+            b1 = data.b1  # mm
+            glass_layer_thicknesses = data.t  # mm
+            w = data.w  # N/mm2
+            E = data.E
+            nu = data.nu
+            material = GlassMaterial(E, nu)
+            layer = GlassLayer(glass_layer_thicknesses, InterlayerMaterialTypeEnum.SG) # type: ignore
+            calculator = FourSidePartialLoadGlass(a, b, layer, w, a1, b1, material)
+            sigma = calculator.calculate_stress()
+            delta = calculator.calculate_displacement()
 
-        return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+            return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+        except ValueError as e:
+            return {"error": str(e)}
 
     @staticmethod
     def calculate_threeside_uniform(data):
-        # 三辺支持板の計算式
-        a = data.free  # mm
-        b = data.fix  # mm
-        t = data.t  # mm -> m
-        w = data.w  # N/mm2
-        nu = data.nu
-        E = data.E
-        material = GlassMaterial(E, nu)
-        layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
-        calculator = ThreeSideUniformLoadGlass(a, b, layer, w, material)
-        sigma = calculator.calculate_stress()
-        delta = calculator.calculate_displacement()
+        try:
+            # 三辺支持板の計算式
+            a = data.free  # mm
+            b = data.fix  # mm
+            glass_layer_thicknesses = data.t  # mm -> m
+            w = data.w  # N/mm2
+            nu = data.nu
+            E = data.E
+            material = GlassMaterial(E, nu)
+            layer = GlassLayer(glass_layer_thicknesses, InterlayerMaterialTypeEnum.SG) # type: ignore
+            calculator = ThreeSideUniformLoadGlass(a, b, layer, w, material)
+            sigma = calculator.calculate_stress()
+            delta = calculator.calculate_displacement()
 
-        return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+            return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+        except ValueError as e:
+            return {"error": str(e)}
 
     @staticmethod
     def calculate_twoside_uniform(data):
-        # 二辺支持板の計算式
-        a = data.free  # mm
-        b = data.fix  # mm
-        t = data.t  # mm -> m
-        w = data.w  # N/mm2
-        nu = data.nu
-        E = data.E
-        material = GlassMaterial(E, nu)
-        layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
-        calculator = TwoSideUniformLoadGlass(a, b, layer, w, material)
-        sigma = calculator.calculate_stress()
-        delta = calculator.calculate_displacement()
+        try:
+            # 二辺支持板の計算式
+            a = data.free  # mm
+            b = data.fix  # mm
+            glass_layer_thicknesses = data.t  # mm -> m
+            w = data.w  # N/mm2
+            nu = data.nu
+            E = data.E
+            material = GlassMaterial(E, nu)
+            layer = GlassLayer(glass_layer_thicknesses, InterlayerMaterialTypeEnum.SG) # type: ignore
+            calculator = TwoSideUniformLoadGlass(a, b, layer, w, material)
+            sigma = calculator.calculate_stress()
+            delta = calculator.calculate_displacement()
 
-        return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+            return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+        except ValueError as e:
+            return {"error": str(e)}
 
     @staticmethod
     def calculate_circular_uniform(data):
-        # 円形支持板の計算式
-        r = data.D / 2  # mm
-        t = data.t  # mm -> m
-        w = data.w  # N/mm2
-        nu = data.nu
-        E = data.E
-        material = GlassMaterial(E, nu)
-        layer = GlassLayer(t, InterlayerMaterialTypeEnum.SG) # type: ignore
-        calculator = CircleUniformLoadGlass(r, layer, w, material)
-        sigma = calculator.calculate_stress()
-        delta = calculator.calculate_displacement()
+        try:
+            # 円形支持板の計算式
+            r = data.D / 2  # mm
+            glass_layer_thicknesses = data.t  # mm -> m
+            w = data.w  # N/mm2
+            nu = data.nu
+            E = data.E
+            material = GlassMaterial(E, nu)
+            layer = GlassLayer(glass_layer_thicknesses, InterlayerMaterialTypeEnum.SG) # type: ignore
+            calculator = CircleUniformLoadGlass(r, layer, w, material)
+            sigma = calculator.calculate_stress()
+            delta = calculator.calculate_displacement()
 
-        return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+            return {"sigma": round(sigma, 2), "delta": round(delta, 2)}
+        except ValueError as e:
+            return {"error": str(e)}
