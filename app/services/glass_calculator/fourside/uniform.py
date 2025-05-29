@@ -61,7 +61,6 @@ class FourSideUniformLoadGlass(IPlate):
         coeff = self._calculate_coeff()
         beta = coeff["beta"]
         layer = self.layer.get_equivalent_thickness()
-        print("layer",layer)
         sigma = (beta * (self.w * self.a ** 2)) / layer ** 2
         
         return sigma
@@ -78,5 +77,4 @@ class FourSideUniformLoadGlass(IPlate):
         E = self.material.E
         layer = self.layer.get_equivalent_thickness()
         delta = (alpha * (self.w * self.a ** 4)) / (layer ** 3 * E)
-        print(delta)
         return delta
