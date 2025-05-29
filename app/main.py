@@ -9,6 +9,7 @@ from app.api.api import router as glass_calculator_router
 
 app = FastAPI(title="Glass Stress Calculator")
 
+# lambdaで設定するため通常のCORS設定はコメントアウト
 # app.add_middleware(
 #     CORSMiddleware,
 #     allow_origins=["*"],

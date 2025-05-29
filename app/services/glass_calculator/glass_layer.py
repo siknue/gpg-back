@@ -19,7 +19,8 @@ class GlassLayer:
         # Todo: SG以外の実装を行う。
         if self.interlayer_material == InterlayerMaterialTypeEnum.SG:
             return total_thickness
-            
+        
+        # SG以外は等価板厚を計算
         else:
             equivalent_thickness = 0.866 * total_thickness - 0.268
             return equivalent_thickness
